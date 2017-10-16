@@ -42,6 +42,7 @@ public class lowestCommonAncestorTest {
 		BT.insert(4);
 		BT.insert(2);
 		BTNode r = BT.root;
+		
 		//test it returns the root node in a BT with only two nodes 
 		assertEquals(BT.LCA(r, r.left, r.right), r);
 	}
@@ -64,49 +65,20 @@ public class lowestCommonAncestorTest {
 		BTNode r = BT.root;
 		
 		//no elements in BT
-		assertNull(BT.LCA(BT.root, 4, 2));
+		assertNull(BT.LCA(r, null, null));
 		
 		//Only one element in BT
-		assertNull(BT.findLca(BT.root, 9, 2));
-		assertNull(BT.findLca(BT.root, 6, 11));
+		assertNull(BT.LCA(r, r.left, null));
+		assertNull(BT.LCA(r, null, r.right));
 	}
 	
 	
 	
 	
-	//Test case for situations when the LCA of two values is their parent node
-	//@Test
-	/*public void testNodesWithSameParent()
-	{
-		lowestCommonAncestor BT = new lowestCommonAncestor();
-		BT.insert(5);
-		BT.root.left = new BTNode(9);
-		BT.root.right = new BTNode(11);
-		BT.root.left.left = new BTNode(14);
-		BT.root.left.right = new BTNode(36);
-		BT.root.right.left = new BTNode(61);
-		BT.root.right.right = new BTNode(19);
 
-		
-		//System.out.println(BT.root.getData() + " " + BT.root.left.getData() + "  " + BT.root.right.getData());
-		BTNode leftParent = BT.root.left;
-		BTNode rightParent = BT.root.right;
-		//System.out.println(leftParent.left.getData()  + " " + leftParent.right.getData());
-		//System.out.println(rightParent.left.getData()  + " " + rightParent.right.getData());
-		
-		
-		System.out.println(BT.findLca(BT.root, 9, 11).getData());
-		System.out.println(BT.findLca(BT.root, 14, 36).getData());
-		System.out.println(BT.findLca(BT.root, 61, 19).getData());
-		
-		assertEquals(BT.findLca(BT.root, 9, 11), BT.root);
-		assertEquals(BT.findLca(BT.root, 14, 36), leftParent);
-		assertEquals(BT.findLca(BT.root, 61, 19), rightParent);
-	}
-	*/
 	
 	@Test
-	public void testNodesWithSameParent2()
+	public void testNodesWithSameParent()
 	{
 	
 		lowestCommonAncestor BT = new lowestCommonAncestor();
@@ -121,31 +93,21 @@ public class lowestCommonAncestorTest {
 		BTNode leftParent = BT.root.left;
 		BTNode rightParent = BT.root.right;
 		
+		//Test case where the root is the LCA
 		assertEquals(BT.LCA(BT.root, BT.root.left, BT.root.right), BT.root);
+		
+		//Test Case where the left child of the root is the LCA
 		assertEquals(BT.LCA(BT.root, leftParent.left, leftParent.right), leftParent);
+		
+		//Test Case where the right child of the root is the LCA
 		assertEquals(BT.LCA(BT.root, rightParent.left, rightParent.right), rightParent);
 		
 	}
 	
 	
-	@Test
-	public void testFind()
-	{
-		lowestCommonAncestor BT = new lowestCommonAncestor();
-		BT.insert(5);
-		BT.root.left = new BTNode(9);
-		BT.root.right = new BTNode(11);
-		BT.root.left.left = new BTNode(14);
-		BT.root.left.right = new BTNode(36);
-		BT.root.right.left = new BTNode(61);
-		
-		System.out.println(BT.find(9).getData());
-		System.out.println(BT.find(14).getData());
-		System.out.println(BT.find(3).getData());
-		assertEquals(BT.find(9), BT.root);
-		assertEquals(BT.find(14), BT.root.left.left);
-		assertNull(BT.find(3));
-	}
+	
+	
+	
 
 }
 	
