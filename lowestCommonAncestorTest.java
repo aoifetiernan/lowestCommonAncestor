@@ -6,12 +6,16 @@ public class lowestCommonAncestorTest {
 
 
 	
-	//test it returns null for the LCA of an empty BT
+	//test it returns null for the LCA of an empty BT, where root has not been defined 
 	@Test
 	public void testEmptyBT()
 	{
 		lowestCommonAncestor binaryTree = new lowestCommonAncestor();
-		assertNull(binaryTree.LCA(binaryTree.root, null, null));		
+		assertNull(binaryTree.LCA(binaryTree.root, null, null));
+		
+		binaryTree.root = new BTNode();
+		BTNode r = binaryTree.root;
+		assertNull(binaryTree.LCA(r, r.left, r.right));
 	}
 	
 	
@@ -22,13 +26,13 @@ public class lowestCommonAncestorTest {
 	public void testOneNodeBT()
 	{
 		lowestCommonAncestor BT = new lowestCommonAncestor();
-		BT.insert(34);
+		BT.root = new BTNode(12);
 		
-		//test it returns equals for the LCA when both of the passed in values are the root
+		//test it returns equals for the LCA when both of the passed in nodes are the root
 		assertEquals(BT.LCA(BT.root, BT.root, BT.root), BT.root);
 		
-		//test it returns null if finding the LCA of single node tree and the values are not the root
-		assertEquals(BT.LCA(BT.root, null, BT.root),BT.root);
+		//test it returns null if finding the LCA of single node tree and the parameterized nodes are not the root
+		assertNull(BT.LCA(BT.root, null, BT.root));
 	}
 	
 	
@@ -39,13 +43,18 @@ public class lowestCommonAncestorTest {
 	public void testTwoNodeBT()
 	{
 		lowestCommonAncestor BT = new lowestCommonAncestor();
-		BT.insert(4);
-		BT.insert(2);
+		BT.root = new BTNode(4);
+		BT.root.left = new BTNode(2);
 		BTNode r = BT.root;
 		
-		//test it returns the root node in a BT with only two nodes 
-		assertEquals(BT.LCA(r, r.left, r.right), r);
+		//test it returns the root node in a BT with only two nodes  
+		assertEquals(BT.LCA(r, r.left, r), r);
+		
+		//test it returns null when a node that does not exist is passed in 
+		assertNull(BT.LCA(r, r.left, r.right));
 	}
+	
+	
 	
 	
 	
@@ -58,10 +67,11 @@ public class lowestCommonAncestorTest {
 	public void testInvalidElements()
 	{
 		lowestCommonAncestor BT = new lowestCommonAncestor();
-		BT.insert(5);
-		BT.insert(9);
-		BT.insert(11);
-		BT.insert(1);
+		BT.root = new BTNode(5);
+		BT.root.left = new BTNode(9);
+		BT.root.right = new BTNode(11);
+		BT.root.left = new BTNode(9);
+		BT.root.left.left = new BTNode(11);
 		BTNode r = BT.root;
 		
 		//no elements in BT
@@ -82,7 +92,7 @@ public class lowestCommonAncestorTest {
 	{
 	
 		lowestCommonAncestor BT = new lowestCommonAncestor();
-		BT.insert(5);
+		BT.root = new BTNode(5);
 		BT.root.left = new BTNode(9);
 		BT.root.right = new BTNode(11);
 		BT.root.left.left = new BTNode(14);
@@ -103,6 +113,8 @@ public class lowestCommonAncestorTest {
 		assertEquals(BT.LCA(BT.root, rightParent.left, rightParent.right), rightParent);
 		
 	}
+	
+	
 	
 	
 	
