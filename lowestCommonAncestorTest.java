@@ -115,6 +115,31 @@ public class lowestCommonAncestorTest {
 	}
 	
 	
+	@Test
+	public void otherTestCases()
+	{
+		lowestCommonAncestor BT = new lowestCommonAncestor();
+		BT.root = new BTNode(5);
+		BT.root.left = new BTNode(9);
+		BT.root.right = new BTNode(11);
+		BT.root.left.left = new BTNode(14);
+		BT.root.left.right = new BTNode(36);
+		BT.root.right.left = new BTNode(61);
+		BT.root.right.right = new BTNode(19);
+		
+		BTNode r = BT.root;
+		BTNode leftParent = BT.root.left;
+		BTNode rightParent = BT.root.right;
+		
+		//Ensure LCA of far left and right nodes is the root 
+		assertEquals(BT.LCA(r, leftParent.left, rightParent.right),r);
+		
+		//Ensure the LCA of a parent and child Node returns the parent Node
+		assertEquals(BT.LCA(r, leftParent, leftParent.right), leftParent);
+		
+	}
+	
+	
 	
 	
 	
