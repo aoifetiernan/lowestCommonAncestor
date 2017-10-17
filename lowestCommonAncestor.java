@@ -97,7 +97,7 @@
  
      public BTNode LCA(BTNode root, BTNode p, BTNode q) 
      {
-    	    if(root==null)
+    	    if(root==null || p==null || q == null)
     	        return null;
     	 
     	    if(root==p || root==q)
