@@ -31,7 +31,7 @@ public class lowestCommonAncestorTest {
 		lowestCommonAncestor BT = new lowestCommonAncestor();
 		BT.root = new BTNode(12);
 		
-		//test it returns equals for the LCA when both of the passed in nodes are the root
+		//test it returns root for the LCA when both of the passed in nodes are the root
 		assertEquals(BT.LCA(BT.root, BT.root, BT.root), BT.root);
 		
 		//test it returns null if finding the LCA of single node tree and the passed in nodes are not the root
@@ -115,6 +115,9 @@ public class lowestCommonAncestorTest {
 	}
 	
 	
+	
+	
+	
 	//Testing other LCA scenarios in larger binary trees. 
 	@Test
 	public void otherTestCases()
@@ -138,6 +141,13 @@ public class lowestCommonAncestorTest {
 		//Ensure the LCA of a parent and child Node returns the parent Node
 		assertEquals(BT.LCA(r, leftParent, leftParent.right), leftParent);
 		
+	
+		leftParent.left.left = new BTNode(6);
+		leftParent.left.right = new BTNode(27);
+		leftParent.right.left = new BTNode(91);
+		leftParent.right.right = new BTNode(4);
+		
+		assertEquals(BT.LCA(r, leftParent.left.left, leftParent.right.right), leftParent);
 	}
 	
 	
