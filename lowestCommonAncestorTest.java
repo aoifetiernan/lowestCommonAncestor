@@ -6,7 +6,7 @@ public class lowestCommonAncestorTest {
 
 
 	
-	//test cases for an empty binary tree 
+	//test cases for an empty binary tree.
 	@Test
 	public void testEmptyBT()
 	{
@@ -24,7 +24,7 @@ public class lowestCommonAncestorTest {
 	
 	
 	
-	//test cases for a Binary Tree with a single Node (root)
+	//test cases for a Binary Tree with a single Node (root).
 	@Test
 	public void testOneNodeBT()
 	{
@@ -41,7 +41,7 @@ public class lowestCommonAncestorTest {
 	
 	
 	
-	//test cases for a two node Binary Tree 
+	//test cases for a two node Binary Tree. 
 	@Test
 	public void testTwoNodeBT()
 	{
@@ -50,10 +50,10 @@ public class lowestCommonAncestorTest {
 		BT.root.left = new BTNode(2);
 		BTNode r = BT.root;
 		
-		//test it returns the root node in a BT with only two nodes  
+		//test it returns the root node when finding the LCA of the only two nodes in the BT.  
 		assertEquals(BT.LCA(r, r.left, r), r);
 		
-		//test it returns null when a node that does not exist is passed in 
+		//test it returns null when a node that has not been defined is parameterized.  
 		assertNull(BT.LCA(r, r.left, r.right));
 	}
 	
@@ -76,11 +76,8 @@ public class lowestCommonAncestorTest {
 		BT.root.left = new BTNode(9);
 		BT.root.left.left = new BTNode(11);
 		BTNode r = BT.root;
-		
-		//no elements in BT
-		assertNull(BT.LCA(r, null, null));
-		
-		//Only one element in BT
+
+		//Only one of the nodes we are finding the LCA of is defined in the Binary Tree
 		assertNull(BT.LCA(r, r.left, null));
 		assertNull(BT.LCA(r, null, r.right));
 	}
@@ -89,7 +86,7 @@ public class lowestCommonAncestorTest {
 	
 	
 
-	
+	//Test case for finding the LCA when the two nodes have the same parent node.
 	@Test
 	public void testNodesWithSameParent()
 	{
@@ -118,6 +115,7 @@ public class lowestCommonAncestorTest {
 	}
 	
 	
+	//Testing other LCA scenarios in larger binary trees. 
 	@Test
 	public void otherTestCases()
 	{
