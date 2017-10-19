@@ -6,13 +6,16 @@ public class lowestCommonAncestorTest {
 
 
 	
-	//test it returns null for the LCA of an empty BT, where root has not been defined 
+	//test cases for an empty binary tree 
 	@Test
 	public void testEmptyBT()
 	{
 		lowestCommonAncestor binaryTree = new lowestCommonAncestor();
+		
+		// test it returns null for the LCA of an empty BT, where root has not been defined 
 		assertNull(binaryTree.LCA(binaryTree.root, null, null));
 		
+		//test it returns null for an empty BT where root has been defined, but has not been given a value
 		binaryTree.root = new BTNode();
 		BTNode r = binaryTree.root;
 		assertNull(binaryTree.LCA(r, r.left, r.right));
@@ -31,8 +34,8 @@ public class lowestCommonAncestorTest {
 		//test it returns equals for the LCA when both of the passed in nodes are the root
 		assertEquals(BT.LCA(BT.root, BT.root, BT.root), BT.root);
 		
-		//test it returns null if finding the LCA of single node tree and the parameterized nodes are not the root
-		assertNull(BT.LCA(BT.root, null, BT.root));
+		//test it returns null if finding the LCA of single node tree and the passed in nodes are not the root
+		assertNull(BT.LCA(BT.root, BT.root.right, BT.root.left));
 	}
 	
 	
