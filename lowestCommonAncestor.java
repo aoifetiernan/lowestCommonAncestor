@@ -1,28 +1,24 @@
+/**
+ * Changes made to the node class to take into account that each node can have multiple children
+ * Using a hash table 
+*/
 
+  class DAGNode<Integer> 
+ {
+    int data;
+    Set<DAGNode<Integer>> adjacent;
 
- class BTNode
- {    
-     BTNode left, right;
-     int data;
- 
-    
-     
-     public BTNode()
-     {
-         left = null;
-         right = null;
-         data = 0;
-     }
-    
-     
-     public BTNode(int n)
-     {
-         left = null;
-         right = null;
-         data = n;
-     }
-       
- }
+    public DAGNode(int data) 
+    {
+        this.data = data;
+        this.adjacent = new HashSet<>();
+    }
+
+    public void addEdge(DAGNode<Integer> edgeData) 
+    {
+        adjacent.add(edgeData);
+    }
+}
  
  
  //Binary Tree data type
