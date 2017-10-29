@@ -70,7 +70,14 @@ public class LowestCommonAncestorDAGTest {
 		@Test 
 		public void testInvalidElements()
 		{
-			
+			LowestCommonAncestorDAG<Integer> DAG = new LowestCommonAncestorDAG<Integer>();	
+			DAG.root = new Node<Integer>(5);
+			Node<Integer> n1 = new Node<Integer>(3);
+			Node<Integer> n2 = new Node<Integer>(9);
+			DAG.root.addEdge(n1);
+			DAG.root.addEdge(n2);
+			assertNull(DAG.LCA( n1, null));
+			assertNull(DAG.LCA(null, DAG.root));
 		}
 		
 		
@@ -94,6 +101,17 @@ public class LowestCommonAncestorDAGTest {
 		@Test
 		public void otherTestCases()
 		{
+			LowestCommonAncestorDAG<Integer> DAG = new LowestCommonAncestorDAG<Integer>();	
+			DAG.root = new Node<Integer>(5);
+			Node<Integer> n1 = new Node<Integer>(3);
+			Node<Integer> n2 = new Node<Integer>(5);
+			Node<Integer> n3 = new Node<Integer>(7);
+			Node<Integer> n4 = new Node<Integer>(2);
+			DAG.root.addEdge(n1);
+			DAG.root.addEdge(n2);
+			DAG.root.addEdge(n3);
+			DAG.root.addEdge(n4);
+			assertEquals(DAG.LCA(n1, n2), DAG.root);
 			
 		}
 		
