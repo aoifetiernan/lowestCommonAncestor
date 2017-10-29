@@ -18,24 +18,30 @@ public class LowestCommonAncestorDAGTest {
 	
 
 	
-	//test cases for an empty DAG with no vertices.
+	//test cases for an empty DAG with no nodes.
 		@Test
 		public void testEmptyDAG()
 		{
 			LowestCommonAncestorDAG<Integer> DAG = new LowestCommonAncestorDAG<Integer>();
 			Node<Integer> n1 = new Node<Integer>(3);
 			Node<Integer> n2 = new Node<Integer>(7);
-			assertNull(DAG.LCA(n1, n2));			
+			assertNull(DAG.LCA(n1, n2));
+			
 		}
 		
 		
 		
 		
-		//test cases for a DAG with a single Node/vertice (root).
+		//test cases for a DAG with a single Node(root).
 		@Test
 		public void testOneNodeDAG()
 		{
+			LowestCommonAncestorDAG<Integer> DAG = new LowestCommonAncestorDAG<Integer>();	
+			DAG.root = new Node<Integer>(5);
+			assertEquals(DAG.LCA(DAG.root, DAG.root), DAG.root);
 			
+			Node<Integer> n1 = new Node<Integer>(3);
+			assertNull(DAG.LCA(DAG.root, n1));
 		}
 		
 		
@@ -45,7 +51,11 @@ public class LowestCommonAncestorDAGTest {
 		@Test
 		public void testTwoNodeDAG()
 		{
-			
+			LowestCommonAncestorDAG<Integer> DAG = new LowestCommonAncestorDAG<Integer>();	
+			DAG.root = new Node<Integer>(5);
+			Node<Integer> n1 = new Node<Integer>(3);
+			DAG.root.addEdge(n1);
+			assertEquals(DAG.LCA(DAG.root, n1), DAG.root);
 		}
 		
 		
