@@ -94,7 +94,23 @@ public class LowestCommonAncestorDAGTest {
 		}
 		
 		
-		
+		/**	Sample DAG cases to be tested
+		 * 
+		 * 
+		 * 	DAG1
+		 * 			2
+		 * 		  /   \
+		 * 		 4	   9
+		 * 		/|     /|\
+		 * 	  11 |    3 8 21
+		 * 	     |
+		 * 		16
+		 * 
+		 * 
+		 * DAG2
+		 *  
+		 * 
+		 */
 		
 		
 		//Testing other LCA scenarios in larger DAG. 
@@ -102,16 +118,24 @@ public class LowestCommonAncestorDAGTest {
 		public void otherTestCases()
 		{
 			LowestCommonAncestorDAG<Integer> DAG = new LowestCommonAncestorDAG<Integer>();	
-			DAG.root = new Node<Integer>(5);
-			Node<Integer> n1 = new Node<Integer>(3);
-			Node<Integer> n2 = new Node<Integer>(5);
-			Node<Integer> n3 = new Node<Integer>(7);
-			Node<Integer> n4 = new Node<Integer>(2);
+			DAG.root = new Node<Integer>(2);
+			Node<Integer> n1 = new Node<Integer>(4);
+			Node<Integer> n2 = new Node<Integer>(9);
+			Node<Integer> n3 = new Node<Integer>(11);
+			Node<Integer> n4 = new Node<Integer>(3);
+			Node<Integer> n5 = new Node<Integer>(8);
+			Node<Integer> n6 = new Node<Integer>(21);
+			Node<Integer> n7 = new Node<Integer>(16);
 			DAG.root.addEdge(n1);
 			DAG.root.addEdge(n2);
-			DAG.root.addEdge(n3);
-			DAG.root.addEdge(n4);
-			assertEquals(DAG.LCA(n1, n2), DAG.root);
+			n1.addEdge(n3);
+			n1.addEdge(n7);
+			n2.addEdge(n4);
+			n2.addEdge(n5);
+			n2.addEdge(n6);
+			assertEquals(DAG.LCA(n4, n5), n2);
+			assertEquals(DAG.LCA(n1, n3), n1);
+			assertEquals(DAG.LCA(n1, n7), n1);
 			
 		}
 		
