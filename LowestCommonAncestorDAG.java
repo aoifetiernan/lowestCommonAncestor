@@ -37,8 +37,6 @@ public class LowestCommonAncestorDAG<Integer>
 {
 	
     Node<Integer> root;
-
-
     
     public Node<Integer> LCA(Node<Integer> node1, Node<Integer> node2) 
     {
@@ -70,6 +68,18 @@ public class LowestCommonAncestorDAG<Integer>
         		smallList = list2;
         		largeList = list1;
         	}
+        	
+        	if(largeList.contains(node1))
+        	{
+        		return(node1);
+        	}
+        	
+        	else if(largeList.contains(node2))
+        	{
+        		return(node2);
+        	}
+        	else
+        	{
 
         		for (int i = largeList.size()-1; i >= 0; i--) 
         		{
@@ -77,9 +87,13 @@ public class LowestCommonAncestorDAG<Integer>
         			{
         				return largeList.get(i);
         			}
-        		}	
+        		}
+        	}
         	return null;
     }
+    
+    
+    
     
     
     
