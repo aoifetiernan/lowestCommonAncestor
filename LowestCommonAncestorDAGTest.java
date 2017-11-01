@@ -1,5 +1,7 @@
 import static org.junit.Assert.*;
 
+import java.util.*;
+
 import org.junit.Test;
 
 public class LowestCommonAncestorDAGTest {
@@ -16,6 +18,36 @@ public class LowestCommonAncestorDAGTest {
 		assertTrue(n1.adjacencyList.contains(n2));
 	}
 	
+	
+	//Testing when asked to find the LCA of a cyclical graph it returns null
+	/**
+	 * 
+	 * cyclical DiGraph:
+	 * 			9
+	 * 		   / \		
+	 * 		 22   17
+	 * 		  \   /
+	 * 			3	
+	 * 
+
+	 */
+	@Test
+	public void testAcyclical()
+	{
+		LowestCommonAncestorDAG<Integer> DAG = new LowestCommonAncestorDAG<Integer>();
+		Node<Integer> n1 = DAG.createNode(9);
+		Node<Integer> n2 = DAG.createNode(22);
+		Node<Integer> n3 = DAG.createNode(17);
+		Node<Integer> n4 = DAG.createNode(3);
+		DAG.root = n1;
+		DAG.root.addEdge(n2);
+		DAG.root.addEdge(n3);
+		n2.addEdge(n4);
+		n3.addEdge(n4);
+		assertNull(DAG.LCA(n4, n2));
+	
+	}
+	
 
 	
 	//test cases for an empty DAG with no nodes.
@@ -23,8 +55,8 @@ public class LowestCommonAncestorDAGTest {
 		public void testEmptyDAG()
 		{
 			LowestCommonAncestorDAG<Integer> DAG = new LowestCommonAncestorDAG<Integer>();
-			Node<Integer> n1 = new Node<Integer>(3);
-			Node<Integer> n2 = new Node<Integer>(7);
+			Node<Integer> n1 = DAG.createNode(3);
+			Node<Integer> n2 = DAG.createNode(7);
 			assertNull(DAG.LCA(n1, n2));
 			assertNull(DAG.LCA(DAG.root, DAG.root));
 			
@@ -38,7 +70,7 @@ public class LowestCommonAncestorDAGTest {
 		public void testOneNodeDAG()
 		{
 			LowestCommonAncestorDAG<Integer> DAG = new LowestCommonAncestorDAG<Integer>();	
-			DAG.root = new Node<Integer>(5);
+			DAG.root = DAG.createNode(5);
 			assertEquals(DAG.LCA(DAG.root, DAG.root), DAG.root);
 			
 			Node<Integer> n1 = new Node<Integer>(3);
@@ -53,8 +85,8 @@ public class LowestCommonAncestorDAGTest {
 		public void testTwoNodeDAG()
 		{
 			LowestCommonAncestorDAG<Integer> DAG = new LowestCommonAncestorDAG<Integer>();	
-			DAG.root = new Node<Integer>(5);
-			Node<Integer> n1 = new Node<Integer>(3);
+			DAG.root = DAG.createNode(5);
+			Node<Integer> n1 = DAG.createNode(3);
 			DAG.root.addEdge(n1);
 			assertEquals(DAG.LCA(DAG.root, n1), DAG.root);
 		}
@@ -72,12 +104,13 @@ public class LowestCommonAncestorDAGTest {
 		public void testInvalidElements()
 		{
 			LowestCommonAncestorDAG<Integer> DAG = new LowestCommonAncestorDAG<Integer>();	
-			DAG.root = new Node<Integer>(5);
-			Node<Integer> n1 = new Node<Integer>(3);
-			Node<Integer> n2 = new Node<Integer>(9);
+			DAG.root = DAG.createNode(5);
+			Node<Integer> n1 = DAG.createNode(3);
+			Node<Integer> n2 = DAG.createNode(9);
 			DAG.root.addEdge(n1);
 			assertNull(DAG.LCA( n1, null));
 			assertNull(DAG.LCA(null, DAG.root));
+			assertNull(DAG.LCA(n1, n2));
 			
 		}
 		
@@ -98,11 +131,11 @@ public class LowestCommonAncestorDAGTest {
 		{
 		
 			LowestCommonAncestorDAG<Integer> DAG = new LowestCommonAncestorDAG<Integer>();	
-			DAG.root = new Node<Integer>(5);
-			Node<Integer> n1 = new Node<Integer>(3);
-			Node<Integer> n2 = new Node<Integer>(9);
-			Node<Integer> n3 = new Node<Integer>(11);
-			Node<Integer> n4 = new Node<Integer>(6);
+			DAG.root = DAG.createNode(5);
+			Node<Integer> n1 = DAG.createNode(3);
+			Node<Integer> n2 = DAG.createNode(9);
+			Node<Integer> n3 = DAG.createNode(11);
+			Node<Integer> n4 = DAG.createNode(6);
 			DAG.root.addEdge(n1);
 			DAG.root.addEdge(n2);
 			n1.addEdge(n3);
@@ -156,13 +189,13 @@ public class LowestCommonAncestorDAGTest {
 			//DAG1
 			LowestCommonAncestorDAG<Integer> DAG1 = new LowestCommonAncestorDAG<Integer>();	
 			DAG1.root = new Node<Integer>(2);
-			Node<Integer> n1 = new Node<Integer>(4);
-			Node<Integer> n2 = new Node<Integer>(9);
-			Node<Integer> n3 = new Node<Integer>(11);
-			Node<Integer> n4 = new Node<Integer>(3);
-			Node<Integer> n5 = new Node<Integer>(8);
-			Node<Integer> n6 = new Node<Integer>(21);
-			Node<Integer> n7 = new Node<Integer>(16);
+			Node<Integer> n1 = DAG1.createNode(4);
+			Node<Integer> n2 = DAG1.createNode(9);
+			Node<Integer> n3 = DAG1.createNode(11);
+			Node<Integer> n4 = DAG1.createNode(3);
+			Node<Integer> n5 = DAG1.createNode(8);
+			Node<Integer> n6 = DAG1.createNode(21);
+			Node<Integer> n7 = DAG1.createNode(16);
 			DAG1.root.addEdge(n1);
 			DAG1.root.addEdge(n2);
 			n1.addEdge(n3);
@@ -178,12 +211,12 @@ public class LowestCommonAncestorDAGTest {
 			
 			//DAG2
 			LowestCommonAncestorDAG<Integer> DAG2 = new LowestCommonAncestorDAG<Integer>();	
-			DAG2.root = new Node<Integer>(19);
-			Node<Integer> node1 = new Node<Integer>(4);
-			Node<Integer> node2 = new Node<Integer>(7);
-			Node<Integer> node3 = new Node<Integer>(13);
-			Node<Integer> node4 = new Node<Integer>(27);
-			Node<Integer> node5 = new Node<Integer>(6);
+			DAG2.root = DAG2.createNode(19);
+			Node<Integer> node1 = DAG2.createNode(4);
+			Node<Integer> node2 = DAG2.createNode(7);
+			Node<Integer> node3 = DAG2.createNode(13);
+			Node<Integer> node4 = DAG2.createNode(27);
+			Node<Integer> node5 = DAG2.createNode(6);
 
 			DAG2.root.addEdge(node1);
 			node1.addEdge(node2);
@@ -199,13 +232,13 @@ public class LowestCommonAncestorDAGTest {
 			//DAG3
 			LowestCommonAncestorDAG<Integer> DAG3 = new LowestCommonAncestorDAG<Integer>();	
 			DAG3.root = new Node<Integer>(1);
-			Node<Integer> x1 = new Node<Integer>(12);
-			Node<Integer> x2 = new Node<Integer>(14);
-			Node<Integer> x3 = new Node<Integer>(2);
-			Node<Integer> x4 = new Node<Integer>(21);
-			Node<Integer> x5 = new Node<Integer>(6);
-			Node<Integer> x6 = new Node<Integer>(13);
-			Node<Integer> x7 = new Node<Integer>(72);
+			Node<Integer> x1 = DAG3.createNode(12);
+			Node<Integer> x2 = DAG3.createNode(94);
+			Node<Integer> x3 = DAG3.createNode(2);
+			Node<Integer> x4 = DAG3.createNode(21);
+			Node<Integer> x5 = DAG3.createNode(6);
+			Node<Integer> x6 = DAG3.createNode(13);
+			Node<Integer> x7 = DAG3.createNode(72);
 			DAG3.root.addEdge(x1);
 			DAG3.root.addEdge(x5);
 			x1.addEdge(x2);
